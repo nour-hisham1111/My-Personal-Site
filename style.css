@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #2b2b2b;
+  background-color: #f7f7f9;
+  line-height: 1.6;
+}
+
+/* this is Header & Navigation */
+header {
+  background-color: #1f2a44;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 0 0 15px 0;
+  padding: 0;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+nav a:hover {
+  background-color: #3a4a70;
+}
+
+hgroup h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+hgroup p {
+  margin: 5px 0 0 0;
+  font-style: italic;
+  color: #c9d1e0;
+}
+
+/* This is the Main content */
+main {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  color: #1f2a44;
+  border-bottom: 2px solid #1f2a44;
+  padding-bottom: 8px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+blockquote {
+  border-left: 4px solid #1f2a44;
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: #eef0f5;
+  font-style: italic;
+  color: #444444;
+}
+
+/* The Contact page */
+main ul {
+  padding-left: 20px;
+}
+
+main ul li {
+  margin-bottom: 10px;
+}
+
+main a {
+  color: #1f2a44;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid #1f2a44;
+}
+
+main a:hover {
+  color: #3a4a70;
+  border-bottom-color: #3a4a70;
+}
+
+/* The Blog article */
+article header {
+  background-color: transparent;
+  color: inherit;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+article time {
+  color: #666666;
+  font-size: 0.9em;
+}
+
+/* The Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #1f2a44;
+  color: #ffffff;
+  font-size: 0.9em;
+  margin-top: 40px;
+}
