@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple To-Do List</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, sans-serif;
+    background: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+  .app {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  h1 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: #222;
+  }
+  .input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  #todoInput {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  #addBtn {
+    padding: 10px 16px;
+    border: none;
+    background: #4f46e5;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  #addBtn:hover { background: #4338ca; }
+  ul { list-style: none; }
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 8px;
+    border-bottom: 1px solid #eee;
+  }
+  li span {
+    flex: 1;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  li.done span {
+    text-decoration: line-through;
+    color: #aaa;
+  }
+  li button.delete {
+    background: none;
+    border: none;
+    color: #e11d48;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .empty {
+    text-align: center;
+    color: #999;
+    padding: 20px 0;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <h1>My To-Do List</h1>
+  <div class="input-row">
+    <input type="text" id="todoInput" placeholder="Add a task...">
+    <button id="addBtn">Add</button>
+  </div>
+  <ul id="todoList"></ul>
+</div>
+
+<script>
+  // this is the querySelector its job is to grab elements from the page 
+  const input = document.querySelector('#todoInput');
+  const addBtn = document.querySelector('#addBtn');
+  const list = document.querySelector('#todoList');
+
+  
+  let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+  
+  function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
+  
+  function render() {
+    list.innerHTML = ''; 
+
+    if (todos.length === 0) {
+      list.innerHTML = `<li class="empty">No tasks yet — add one above!</li>`;
+      return;
+    }
+
+    // this is for looping through the todos array
+    todos.forEach((todo, index) => {
+      const li = document.createElement('li');
+      if (todo.done) li.classList.add('done'); // condition
+
+     
+      li.innerHTML = `
+        <span>${todo.text}</span>
+        <button class="delete">✕</button>
+      `;
+
+      // this is for the done state
+      li.querySelector('span').addEventListener('click', () => {
+        todo.done = !todo.done;
+        saveTodos();
+        render();
+      });
+
+      // this is for deleting a task
+      li.querySelector('.delete').addEventListener('click', () => {
+        todos = todos.filter((_, i) => i !== index); // array method
+        saveTodos();
+        render();
+      });
+
+      list.appendChild(li);
+    });
+  }
+
+  // this is to add a new task
+  function addTodo() {
+    const text = input.value.trim();
+    if (text === '') return; // This is to ignore empty input
+
+    todos.push({ text, done: false }); // arrayfor the  method + object
+    input.value = '';
+    saveTodos();
+    render();
+  }
+
+  addBtn.addEventListener('click', addTodo);
+
+  // this is for tpping the Enter button to add a task
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addTodo();
+  });
+
+
+  render();
+</script>
+
+</body>
+</html>
